@@ -9,7 +9,6 @@ class Board
   
   def initialize
     @cells = starting_cells
-    # binding.pry
   end
 
   def display # prints board out including cells array
@@ -32,9 +31,18 @@ class Board
       @cells.count {|c| c == "X" || c == "O"}
   end
   
-  def taken?(position)  #=> true if position is taken
-    cell = input_to_index(position) # converts input to 0 index
+  def taken?(input)  #=> true if position is taken
+    cell = input_to_index(input) # converts input to 0 index
     @cells[cell] != " " # checks if spot is "X" or "O"
+  end
+
+  def valid_move?(input)  #=> true if between 1-9 and not taken?
+    # makes number, checks between 1-9, makes sure spot is not taken  
+    input.to_i.between?(1, 9) && !taken?(input)
+  end
+
+  def update(input, player) #=> updates @cells array with player.token
+      @cells[input_to_index(input)] = player.token
   end
 
   def starting_cells  # creates empty array
