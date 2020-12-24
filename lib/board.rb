@@ -1,13 +1,13 @@
-
+require_relative '../config/environment.rb'
 
 class Board
   attr_accessor :cells
 
-  def reset!
+  def reset!  # clears all cells in array
     @cells = starting_cells
   end
   
-  def initialize
+  def initialize  # assgins array of " "'s to instance variable
     @cells = starting_cells
   end
 
@@ -19,7 +19,7 @@ class Board
     puts " #{@cells[6]} | #{cells[7]} | #{cells[8]} "
   end
 
-  def position(user_input)  #=> what is in cell
+  def position(user_input)  # updates the board with the players move
     @cells[user_input.to_i - 1]
   end
 
@@ -45,11 +45,11 @@ class Board
       @cells[input_to_index(input)] = player.token
   end
 
-  def starting_cells  # creates empty array
+  def starting_cells  # creates array of " "
     Array.new(9, " ")
   end
 
-  def input_to_index(input)
-    input.to_i - 1
+  def input_to_index(input) 
+    input.to_i - 1  # turns input to zero index for array
   end
 end
